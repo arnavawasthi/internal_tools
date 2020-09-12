@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// datasource sqlite {
+//   provider = "sqlite"
+//   url      = "file:./db.sqlite"
+// }
+
+datasource mysql {
+  provider = "mysql"
+  url      = "mysql://root:@localhost:3306/internal_tool"
+}
+
+// SQLite is easy to start with, but if you use Postgres in production
+// you should also use it in development with the following:
+//datasource postgresql {
+//  provider = "postgresql"
+//  url      = env("DATABASE_URL")
+//}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// --------------------------------------
+
+model Section {
+  id          Int      @default(autoincrement()) @id
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int
+  description String
+  datasource  String   @default("")
+  query       String
+  drilldown   String   @default("{}")
+  report      Report   @relation(fields: [reportId], references: [id])
+  reportId    Int
+}
+
+model Report {
+  id         Int       @default(autoincrement()) @id
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  name       String
+  sections   Section[]
+  datasource String    @default("local")
+  params     String    @default("{}")
+}
+
+model DataSource {
+  id         Int      @id
+  createdAt  DateTime @default(now())
+  env        String
+  name       String
+  params     String
+  sourceKey  String
+  sourceType String
+  updatedAt  DateTime @updatedAt
+}

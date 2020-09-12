@@ -1,0 +1,24 @@
+[
+  {
+    "name": "default",
+    "type": "mysql",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "root",
+    "password": "",
+    "database": "internal_tool",
+    "migrations": ["db/migration/*.ts"],
+    "cli": {
+      "migrationsDir": "db/migration"
+    }
+  },
+  {
+    "name": "default2",
+    "type": "mysql",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "root",
+    "password": "",
+    "database": "internal_tool"
+  }
+]
