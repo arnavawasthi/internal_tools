@@ -16,11 +16,12 @@ export const EditDataSource = () => {
 
       <DataSourceForm
         initialValues={dataSource}
-        onSubmit={async () => {
+        onSubmit={async (values) => {
+          delete values["id"]
           try {
             const updated = await updateDataSource({
               where: { id: dataSource.id },
-              data: { name: "MyNewName" },
+              data: values,
             })
             mutate(updated)
             alert("Success!" + JSON.stringify(updated))

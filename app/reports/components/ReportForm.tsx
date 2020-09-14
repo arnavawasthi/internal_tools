@@ -1,4 +1,7 @@
 import React from "react"
+import { useQuery } from "blitz"
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from "@material-ui/core"
+import getDataSources from "app/dataSources/queries/getDataSources"
 
 type ReportFormProps = {
   initialValues: any
@@ -6,6 +9,13 @@ type ReportFormProps = {
 }
 
 const ReportForm = ({ initialValues, onSubmit }: ReportFormProps) => {
+  const [values, setValues] = React.useState(initialValues)
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value })
+  }
+
+  const [dataSources] = useQuery(getDataSources, {})
+
   return (
     <form
       onSubmit={(event) => {
@@ -13,9 +23,37 @@ const ReportForm = ({ initialValues, onSubmit }: ReportFormProps) => {
         onSubmit(event)
       }}
     >
-      <div>Put your form fields here. But for now, just click submit</div>
+      <div>
+        <TextField
+          id="name"
+          label="Name"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={values.name}
+          onChange={handleChange("name")}
+        ></TextField>
+        <FormControl variant="outlined" fullWidth>
+          <InputLabel id={"datasource_label"}>{"Datasource"}</InputLabel>
+          <Select
+            id="datasource"
+            labelId="datasource_label"
+            label="Datasource"
+            variant="outlined"
+            fullWidth
+            value={values["datasource"]}
+            onChange={handleChange("datasource")}
+          >
+            {dataSources.map((dataSource) => (
+              <MenuItem value={dataSource.sourceKey}>{dataSource.name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
       <div>{JSON.stringify(initialValues)}</div>
-      <button>Submit</button>
+      <Button variant="contained" color="primary" onClick={() => onSubmit(values)}>
+        Submit
+      </Button>
     </form>
   )
 }

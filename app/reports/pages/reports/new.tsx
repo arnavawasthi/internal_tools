@@ -1,9 +1,9 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Head, Link, useRouter, BlitzPage } from "blitz"
 import createReport from "app/reports/mutations/createReport"
 import ReportForm from "app/reports/components/ReportForm"
 
-const NewReportPage: BlitzPage = () => {
+const NewReport: BlitzPage = () => {
   const router = useRouter()
 
   return (
@@ -18,9 +18,9 @@ const NewReportPage: BlitzPage = () => {
 
         <ReportForm
           initialValues={{}}
-          onSubmit={async () => {
+          onSubmit={async (values) => {
             try {
-              const report = await createReport({ data: { name: "MyName" } })
+              const report = await createReport({ data: values })
               alert("Success!" + JSON.stringify(report))
               router.push("/reports/[reportId]", `/reports/${report.id}`)
             } catch (error) {
@@ -36,6 +36,23 @@ const NewReportPage: BlitzPage = () => {
             </Link>
           }
         </p>
+      </main>
+    </div>
+  )
+}
+
+const NewReportPage: BlitzPage = () => {
+  return (
+    <div>
+      <Head>
+        <title>New Report</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        <Suspense fallback={<div>Loading...</div>}>
+          <NewReport />
+        </Suspense>
       </main>
     </div>
   )

@@ -18,9 +18,9 @@ const NewDataSourcePage: BlitzPage = () => {
 
         <DataSourceForm
           initialValues={{}}
-          onSubmit={async () => {
+          onSubmit={async (values) => {
             try {
-              const dataSource = await createDataSource({ data: { name: "MyName" } })
+              const dataSource = await createDataSource({ data: values })
               alert("Success!" + JSON.stringify(dataSource))
               router.push("/dataSources/[dataSourceId]", `/dataSources/${dataSource.id}`)
             } catch (error) {

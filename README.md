@@ -4,6 +4,12 @@
 
 ### Configure db
 
+Create database in Mysql/Mariadb for internal_tools:
+
+```
+create database internal_tool;
+```
+
 Using Mysql as the database for saving configuration. There are two files for configuring db:
 
 - ormconfig.json
@@ -15,12 +21,16 @@ Using Mysql as the database for saving configuration. There are two files for co
 Run typeorm migrations using following command. It will get your db upto date.
 
 ```
+npm install -g typeorm
+npm install -g ts-node
+
 ts-node ./node_modules/typeorm/cli.js migration:run
 ```
 
 ### Run your app in the development mode.
 
 ```
+npm install -g blitz
 blitz start
 ```
 

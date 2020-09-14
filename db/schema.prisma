@@ -8,7 +8,7 @@
 
 datasource mysql {
   provider = "mysql"
-  url      = "mysql://root:@localhost:3306/internal_tool"
+  url      = "mysql://dbuser:mariadb@localhost:3306/internal_tool"
 }
 
 // SQLite is easy to start with, but if you use Postgres in production
@@ -48,7 +48,7 @@ model Report {
 }
 
 model DataSource {
-  id         Int      @id
+  id         Int      @default(autoincrement()) @id
   createdAt  DateTime @default(now())
   env        String
   name       String
