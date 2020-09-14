@@ -14,23 +14,31 @@ Using Mysql as the database for saving configuration. There are two files for co
 
 - ormconfig.json
 - db/schema.prisma
-  TODO: Currently it asks you to provide same config thrice. Will improvide in a later version.
+  TODO: Currently it asks you to provide same config thrice. Will improve in a later version.
 
 ### Create tables
 
-Run typeorm migrations using following command. It will get your db upto date.
+Install typeorm cli
 
 ```
 npm install -g typeorm
 npm install -g ts-node
+```
 
+Run typeorm migrations using following command. It will get your db upto date.
+
+```
 ts-node ./node_modules/typeorm/cli.js migration:run
+```
+
+### Install blitz
+```
+npm install -g blitz
 ```
 
 ### Run your app in the development mode.
 
 ```
-npm install -g blitz
 blitz start
 ```
 
