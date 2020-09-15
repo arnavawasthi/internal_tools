@@ -1,5 +1,9 @@
 # internal_tools
 
+## Sample
+
+![Sample GIF](https://media.giphy.com/media/S6l588aDav7M3nkO0U/giphy.gif)
+
 ## Getting Started
 
 ### Configure db
