@@ -9,7 +9,7 @@ const Home = () => (
     </Head>
 
     <main>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary" style={{ margin: "10px" }}>
         <Link href="/dataSources/new">
           <span style={{ color: "#fff" }}>Add Datasource</span>
         </Link>
